@@ -9,7 +9,7 @@ Calendario para crear tareas, se pone en practica los siguientes lenguajes:
 - Css
 - Redux
 
-#Backend
+# Backend
 
 - Node.js
 - Express

@@ -3,7 +3,7 @@ import { LoginPages } from '../auth';
 import { CalendarPages } from '../calendar';
 
 const AppRouter = () => {
-  const authStatus = 'authenticated';
+  const authStatus = 'not-authenticated';
 
   return (
     <>

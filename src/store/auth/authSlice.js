@@ -13,12 +13,21 @@ export const authSlice = createSlice({
       state.user = {};
       state.errorMessage = undefined;
     },
-  },
-  onLogin: (state, { payload }) => {
-    state.status = 'authenticated';
-    state.user = payload;
-    state.errorMessage = undefined;
+    onLogin: (state, { payload }) => {
+      state.status = 'authenticated';
+      state.user = payload;
+      state.errorMessage = undefined;
+    },
+    onLogout: (state, { payload }) => {
+      state.status = 'authenticated';
+      state.user = payload;
+      state.errorMessage = payload;
+    },
+    clearErrorMessage: (state) => {
+      state.errorMessage = undefined;
+    },
   },
 });
 
-export const { onChecking, onLogin } = authSlice.actions;
+export const { onChecking, onLogin, onLogout, clearErrorMessage } =
+  authSlice.actions;

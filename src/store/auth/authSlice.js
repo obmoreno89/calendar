@@ -19,7 +19,7 @@ export const authSlice = createSlice({
       state.errorMessage = undefined;
     },
     onLogout: (state, { payload }) => {
-      state.status = 'authenticated';
+      state.status = 'not-authenticated';
       state.user = payload;
       state.errorMessage = payload;
     },

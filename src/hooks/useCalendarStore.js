@@ -5,9 +5,12 @@ import {
   onSetActiveEvent,
   onUpdateEvent,
 } from '../store';
+import { calendarApi } from '../api';
+import { converEventsToDateEvents } from '../helpers';
 
 export const useCalendarStore = () => {
   const { events, activeEvent } = useSelector((state) => state.calendar);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const setActiveEvent = (calendarEvent) => {
@@ -18,7 +21,9 @@ export const useCalendarStore = () => {
     if (calendatEvent._id) {
       dispatch(onUpdateEvent({ ...calendatEvent }));
     } else {
-      dispatch(onAddNewEvent({ ...calendatEvent, _id: new Date().getTime() }));
+      const { data } = await calendarApi.post('/events', calendatEvent);
+      console.log({ data });
+      dispatch(onAddNewEvent({ ...calendatEvent, id: data.evento.id, user }));
     }
   };
 
@@ -26,12 +31,24 @@ export const useCalendarStore = () => {
     dispatch(onDeleteEvent());
   };
 
+  const startLoadingEvents = async () => {
+    try {
+      const { data } = await calendarApi.get('/events');
+      const events = converEventsToDateEvents(data.eventos);
+      console.log(events);
+    } catch (error) {
+      console.log('error cargando eventos');
+    }
+  };
+
   return {
     hasEventSelected: !!activeEvent,
     events,
     activeEvent,
     setActiveEvent,
+
     startSavingEvent,
     startDeletingEvent,
+    startLoadingEvents,
   };
 };

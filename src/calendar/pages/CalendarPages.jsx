@@ -9,12 +9,12 @@ import {
   FabDelete,
 } from '../';
 import { localizer, getMessagesES } from '../../helpers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useUiStore, useCalendarStore } from '../../hooks';
 
 export const CalendarPages = () => {
   const { openDateModal } = useUiStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const [lastView, setLastView] = useState(
     localStorage.getItem('lastView') || 'week'
   );
@@ -42,6 +42,10 @@ export const CalendarPages = () => {
     localStorage.setItem('lastView', event);
     setLastView(event);
   };
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   return (
     <>

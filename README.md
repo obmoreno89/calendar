@@ -25,8 +25,7 @@ Calendario para crear tareas, se pone en practica los siguientes lenguajes:
 
 ## Te gustaria probar la aplicación? 
 
-username: +++++++
-password: +++++++
+Puedes crear una cuenta y puedes ingresar a crear tus eventos
 
 VITE_API_URL=http://localhost:3000/api
 
